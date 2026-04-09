@@ -1,0 +1,5 @@
+{
+  "name": "What's in my Fridge",
+  "description": "Reduce food waste by generating recipes based on the ingredients you have.",
+  "requestFramePermissions": []
+}
