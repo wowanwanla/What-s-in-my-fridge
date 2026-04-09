@@ -144,9 +144,9 @@ export default function App() {
       const ingredientNames = selectedIngredients.map(i => i.name).join(", ");
       
       // Use Gemini to determine API parameters
-      const prompt = `你是一个集成了 Spoonacular 数据库的智能菜谱助手。你的核心任务是将用户输入的原材料转化为标准的 API 查询参数。
-食材：${ingredientNames}
-请输出一个标准化的 JSON 块，用于前端调用 Spoonacular API。不要有任何多余文字：
+      const prompt = `You are an intelligent recipe assistant integrated with the Spoonacular database. Your core task is to transform the user's input ingredients into standard API query parameters.
+Ingredients: ${ingredientNames}
+Please output a standardized JSON block for the frontend to call the Spoonacular API. Do not include any extra text:
 {
 "endpoint": "findByIngredients",
 "params": {
@@ -215,18 +215,18 @@ export default function App() {
     setIsLoadingGuide(true);
 
     try {
-      const prompt = `你是一个集成了 Spoonacular 数据库的智能菜谱助手。
-菜名：${recipe.title}
-图片：${recipe.image}
-已有食材：${recipe.ingredients.join(", ")}
-缺失食材：${recipe.missedIngredients?.join(", ") || "无"}
+      const prompt = `You are an intelligent recipe assistant integrated with the Spoonacular database.
+Recipe Name: ${recipe.title}
+Image: ${recipe.image}
+Available Ingredients: ${recipe.ingredients.join(", ")}
+Missing Ingredients: ${recipe.missedIngredients?.join(", ") || "None"}
 
-请以 Markdown 格式展示图片，并详细用中文撰写烹饪步骤。
-展示图片格式：![${recipe.title}](${recipe.image})
-要求：
-1. 语言：对用户的讲解和步骤说明必须使用中文。
-2. 专业度：在步骤中加入适量的烹饪小贴士（如：火候控制、去腥技巧）。
-3. 优先寻找匹配度最高（Missed Ingredient 最少）的菜谱指导。`;
+Please display the image in Markdown format and write detailed cooking steps in English.
+Image format: ![${recipe.title}](${recipe.image})
+Requirements:
+1. Language: Explanations and step-by-step instructions must be in English.
+2. Professionalism: Include appropriate cooking tips (e.g., heat control, seasoning tips).
+3. Priority: Find the recipe guide with the highest match (fewest missed ingredients).`;
 
       const result = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
